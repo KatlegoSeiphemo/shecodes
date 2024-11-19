@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Search and Time Display</title>
+    <style>
+        body {
+            font-family:  sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        #time {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #search-container {
+            margin-top: 20px;
+        }
+        #city-name {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            width: 200px;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="time"></div>
+
+    <!-- Search bar for city -->
+    <div id="search-container">
+        <input type="text" id="city-input" placeholder="Enter city">
+        <button onclick="searchCity()">Search</button>
+        <div id="city-name"></div>
+    </div>
+
+    <script>
+        // Function to display current date and time
+        function displayTime() {
+            const now = new Date();
+            const options = { weekday: 'long', hour: '2-digit', minute: '2-digit' };
+            const formattedTime = now.toLocaleTimeString('en-US', options);
+            const day = now.toLocaleDateString('en-US', { weekday: 'long' });
+
+            // Combine day and time in the format "Tuesday 16:00"
+            document.getElementById('time').textContent = `${day} ${formattedTime}`;
+        }
+
+        // Function to handle the search action
+        function searchCity() {
+            const cityInput = document.getElementById('city-input').value;
+            if (cityInput) {
+                document.getElementById('city-name').textContent = `You searched for: ${cityInput}`;
+            } else {
+                document.getElementById('city-name').textContent = 'Please enter a city name.';
+            }
+        }
+
+        // Call the displayTime function every minute to update the time
+        setInterval(displayTime, 60000);
+        displayTime(); // Initial call to display time when the page loads
+    </script>
+</body>
+</html>
